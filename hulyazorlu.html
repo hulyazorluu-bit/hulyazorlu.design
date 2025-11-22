@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hulya Zorlu – Creative Product Designer</title>
+
+  <!-- Typo moderne similaire au site que tu m’as montré -->
+  <link href="https://fonts.googleapis.com/css2?family=Neue+Montreal:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #1a1a1a; /* gris foncé */
+      overflow: hidden;
+      font-family: "Neue Montreal", sans-serif;
+      color: #fff;
+    }
+
+    /* NAVIGATION — Ton nom / Menu / LinkedIn */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 25px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      font-size: 15px;
+      letter-spacing: .5px;
+    }
+
+    .center-menu {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 35px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      opacity: 1;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+      text-align: center;
+      padding: 0 40px;
+    }
+
+    .hero h1 {
+      font-size: 85px;
+      font-weight: 700;
+      line-height: 1.1;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Petits points animés */
+    .floating-dots {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .dot {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: float 6s infinite ease-in-out alternate;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0px) translateX(0px); }
+      to { transform: translateY(-40px) translateX(20px); }
+    }
+
+    /* CURSEUR — rond + cercle rotatif */
+    #cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    #cursor-circle {
+      position: fixed;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: rotate 6s linear infinite;
+    }
+
+    #cursor-circle span {
+      position: absolute;
+      font-size: 12px;
+      letter-spacing: 6px;
+      opacity: 0.8;
+    }
+
+    @keyframes rotate {
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- CURSEUR ANIMÉ -->
+  <div id="cursor-dot"></div>
+
+  <div id="cursor-circle">
+    <span>SCROLL ★ SCROLL ★ SCROLL ★</span>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="name">HULYA ZORLU</div>
+
+    <div class="center-menu">
+      <a href="#">Travaux</a>
+      <a href="#">À propos</a>
+      <a href="#">Contact</a>
+    </div>
+
+    <a href="https://www.linkedin.com/in/hulya-z-14ab90160/" target="_blank">LinkedIn</a>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="floating-dots" id="dots-container"></div>
+
+    <h1>Creative<br>Product Designer</h1>
+  </section>
+
+
+  <script>
+    /* CURSEUR QUI SUIT LA SOURIS */
+    const cursorDot = document.getElementById("cursor-dot");
+    const cursorCircle = document.getElementById("cursor-circle");
+
+    document.addEventListener("mousemove", (e) => {
+      cursorDot.style.left = `${e.clientX}px`;
+      cursorDot.style.top = `${e.clientY}px`;
+
+      cursorCircle.style.left = `${e.clientX}px`;
+      cursorCircle.style.top = `${e.clientY}px`;
+    });
+
+    /* GÉNÉRATION DES PETITS POINTS ANIMÉS */
+    const dotsContainer = document.getElementById("dots-container");
+
+    for (let i = 0; i < 35; i++) {
+      let dot = document.createElement("div");
+      dot.classList.add("dot");
+      dot.style.left = Math.random() * 100 + "%";
+      dot.style.top = Math.random() * 100 + "%";
+      dot.style.animationDelay = Math.random() * 5 + "s";
+      dotsContainer.appendChild(dot);
+    }
+  </script>
+
+</body>
+</html>
